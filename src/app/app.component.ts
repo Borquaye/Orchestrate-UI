@@ -14,39 +14,36 @@ import { Attendee } from 'app/attendees/attendee.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
   title = 'orc';
+  attendeeName: string;
+  attendees: FirebaseListObservable<Attendee[]>;
 
+  constructor(
+    db: AngularFireDatabase,
+    private _agendaService: AgendaService,
+    private _attendeeService: AttendeeService,
+    private _signalR: SignalR
+  ) {
+    // this.attendees = _attendeeService.attendees;
+    this.attendees = _attendeeService.attendees;
+  }
 
-    ngOnInit() {
-
+  ngOnInit() {
     this._signalR.connect().then((c) => {
 
-      let onMessageSent = new BroadcastEventListener<any>('SpeechRecognised');
+      const onMessageSent = new BroadcastEventListener<any>('SpeechRecognised');
       c.listen(onMessageSent)
       onMessageSent.subscribe((msg: any) => {
 
-        let intent = msg.intent;
-        let entity = msg.entity;
+        const intent = msg.intent;
+        const entity = msg.entity;
 
-        console.log("intent: " + intent);
-        console.log("entity: " + entity);
+        console.log('intent: ' + intent);
+        console.log('entity: ' + entity);
 
       });
 
     });
-
-  }
-
-
-  attendeeName: string;
-  attendees: Observable<Attendee[]>;
-
-  usersTest: FirebaseListObservable<any[]>;
-
-  constructor(db: AngularFireDatabase, private _agendaService: AgendaService, private _attendeeService: AttendeeService, private _signalR: SignalR) {
-    // this.attendees = _attendeeService.attendees;
-    this.usersTest = _attendeeService.attendees;
   }
 
   addAttendee(name: string) {

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MeetingComponent } from './meeting/meeting.component';
 
-import { SignalRModule, SignalRConfiguration } from "ng2-signalr";
+import { SignalRModule, SignalRConfiguration } from 'ng2-signalr';
 import 'signalr/jquery.signalR.js';
 
 // v2.0.0

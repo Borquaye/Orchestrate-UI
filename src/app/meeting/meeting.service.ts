@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Meeting} from "app/meeting/meeting.model";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {Observable} from "rxjs/Observable";
-import {Http} from "@angular/http/http";
-import {Agenda} from "app/agendas/agenda.model";
-import {Attendee} from "app/atendees/atendee.model";
-import {Action} from "rxjs/scheduler/Action";
+import {Meeting} from 'app/meeting/meeting.model';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {Http} from '@angular/http/http';
+import {Agenda} from 'app/agendas/agenda.model';
+import {Attendee} from 'app/attendees/attendee.model';
+import {Action} from 'rxjs/scheduler/Action';
 
 @Injectable()
 export class MeetingService {
@@ -16,11 +16,11 @@ private dataStore: {
   };
 
   private _meetings: BehaviorSubject<Meeting[]>;
-  public meetings : Observable<Meeting[]>;
+  public meetings: Observable<Meeting[]>;
 
   private _currentMeeting: BehaviorSubject<Meeting>;
   public currentMeeting: Observable<Meeting>;
-  
+
   constructor(private _http: Http) {
     this.dataStore = {
       meetings: [
