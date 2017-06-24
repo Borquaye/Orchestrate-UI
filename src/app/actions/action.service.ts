@@ -4,13 +4,14 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 import {Http} from "@angular/http";
 import {ACTION_STATUS} from "app/shared/action-status.enum";
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 
 @Injectable()
 export class ActionService {
   actionItems: FirebaseListObservable<any[]>;
-  
-  constructor(private _http: Http, db: AngularFireDatabase) {
+  action: FirebaseObjectObservable<any>;  
+
+  constructor(private db: AngularFireDatabase) {
     this.actionItems = db.list('https://meetinganalasys.firebaseio.com/new');
   }
 
@@ -19,6 +20,6 @@ export class ActionService {
   }
 
   getAction(id: number) {
-
+    this.action = this.db.object('https://meetinganalasys.firebaseio.com/new/'+id);
   }
 }

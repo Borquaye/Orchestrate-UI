@@ -22,7 +22,8 @@ export class AttendeeService {
   }
 
   editAttendee(attendee: Attendee) {
-
+    this.getAttendee(attendee.id);
+    this.attendee.update({attendee}); // not sure if this will work, need to test if poss  
   }
 
   removeAttendee(id: string) {
