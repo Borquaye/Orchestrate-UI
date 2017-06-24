@@ -56,21 +56,21 @@ private dataStore: {
     //   })
 
     this.dataStore.meetings.push(meeting)
-    this._meetings.next(Object.assign({}, this.dataStore).meeting);
+    this._meetings.next(Object.assign({}, this.dataStore).meetings);
   }
 
-  getMeeting(id: number) {
-    this.dataStore.currentMeeting = this.dataStore.meeting.find(action => action.id === id);
+  getMeeting(title: string) {
+    this.dataStore.currentMeeting = this.dataStore.meetings.find(meeting => meeting.title === title);
     this._currentMeeting.next(Object.assign({}, this.dataStore).currentMeeting);
   }
 
   editMeeting(meeting: Meeting) {
     this.dataStore.meetings.splice(1, 1, meeting)
-    this._meetings.next(Object.assign({}, this.dataStore).meeting);
+    this._meetings.next(Object.assign({}, this.dataStore).meetings);
   }
 
   removeMeeting(id: number) {
     this.dataStore.meetings.splice(id, 1)
-    this._meetings.next(Object.assign({}, this.dataStore).meeting);
+    this._meetings.next(Object.assign({}, this.dataStore).meetings);
   }
 }
