@@ -5,4 +5,28 @@ html{
 body{
     background-color: #ecf0f1;
     font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.wrapper{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.headMan{
+    height: 100px;
+    background-color: #bdc3c7;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.headMan > h1{
+    margin: 0;
+    letter-spacing: 6px;
+    font-weight: 100;
 }
