@@ -34,7 +34,6 @@ export class MeetingComponent {
       for (let o = 0; o < Object.keys(me._meeting.value.agendaItems).length; o++) {
         me.meetingAgendas.push(me._meeting.value.agendaItems[Object.keys(me._meeting.value.agendaItems)[o]]);
       }
-      debugger;
     });
 
   }
