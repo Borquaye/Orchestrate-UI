@@ -27,7 +27,7 @@ import { AttendeeService } from 'app/attendees/attendee.service';
 import { InputTextModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
-
+import {ActionService} from "app/actions/action.service";
 
 
 @NgModule({
@@ -48,7 +48,8 @@ import { FormsModule } from '@angular/forms';
   ],
   providers: [
     AgendaService,
-    AttendeeService
+    AttendeeService,
+    ActionService
   ],
   bootstrap: [AppComponent]
 })
