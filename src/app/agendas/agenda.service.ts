@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Agenda } from 'app/agendas/agenda.model';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { Http } from '@angular/http/http';
+import { Http } from '@angular/http';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Injectable()
 export class AgendaService {
@@ -17,8 +18,10 @@ export class AgendaService {
   private _currentAgenda: BehaviorSubject<Agenda>;
   public currentAgenda: Observable<Agenda>;
 
+  items: FirebaseListObservable<any[]>;
 
-  constructor(private _http: Http) {
+
+  constructor(private _http: Http, db: AngularFireDatabase) {
     this.dataStore = {
       agendas: [
         { id: 1, name: 'Recording transcripts'},
@@ -33,6 +36,8 @@ export class AgendaService {
 
     this._currentAgenda =  <BehaviorSubject<Agenda>>new BehaviorSubject({});
     this.currentAgenda = this._currentAgenda.asObservable();
+
+    this.items = db.list('/items');
   }
 
   getAgendas() {

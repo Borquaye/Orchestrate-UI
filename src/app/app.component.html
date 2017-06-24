@@ -7,4 +7,10 @@
 <orc-meeting></orc-meeting>
 </div> 
 
+<!--<input type="text" pInputText [(ngModel)]="attendeeName"/>-->
+<input #attendeeInput type="text" pInputText [(ngModel)]="attendeeName"/>
+
+<button pButton type="button" (click)="addAttendee(attendeeInput.value)" label="Add Attendee"></button>
+
+<div *ngFor="let attendee of usersTest | async">{{attendee.name | json}}</div>
 <router-outlet></router-outlet>
