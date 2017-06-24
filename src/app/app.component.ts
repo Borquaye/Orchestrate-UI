@@ -1,5 +1,12 @@
+
 import { Component, OnInit } from '@angular/core';
 import { SignalR, BroadcastEventListener } from "ng2-signalr";
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AgendaService } from 'app/agendas/agenda.service';
+import { AttendeeService } from 'app/attendees/attendee.service';
+import { Observable } from 'rxjs/Observable';
+import { Attendee } from 'app/attendees/attendee.model';
+
 
 @Component({
   selector: 'orc-root',
@@ -10,9 +17,6 @@ export class AppComponent implements OnInit {
   
   title = 'orc';
 
-  constructor(private _signalR: SignalR) { 
-
-  }
 
     ngOnInit() {
 
@@ -32,6 +36,21 @@ export class AppComponent implements OnInit {
 
     });
 
+  }
+
+
+  attendeeName: string;
+  attendees: Observable<Attendee[]>;
+
+  usersTest: FirebaseListObservable<any[]>;
+
+  constructor(db: AngularFireDatabase, private _agendaService: AgendaService, private _attendeeService: AttendeeService, private _signalR: SignalR) {
+    // this.attendees = _attendeeService.attendees;
+    this.usersTest = _attendeeService.attendees;
+  }
+
+  addAttendee(name: string) {
+    this._attendeeService.addAttendee(new Attendee(name));
   }
 
 }

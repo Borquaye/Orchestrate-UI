@@ -1,4 +1,4 @@
-import { Attendee } from 'app/atendees/atendee.model';
+import { Attendee } from 'app/attendees/attendee.model';
 import { Agenda } from 'app/agendas/agenda.model';
 
 export class Meeting {
@@ -6,9 +6,6 @@ export class Meeting {
     attendees: Attendee[];
     agendaItems: Agenda[];
 
-
     constructor() {}
-
-
 
 }
