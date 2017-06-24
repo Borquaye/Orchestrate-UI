@@ -14,8 +14,10 @@ import {Action} from 'app/actions/action.model';
 
 export class MeetingComponent {
   meeting: FirebaseObjectObservable<any>;
+  _meeting: any;
   actionsItems: FirebaseListObservable < any[] >;
   attendees: FirebaseListObservable < Attendee[] >;
+  meetingAgendas: any[];
 
   constructor(
         private _attendeeService: AttendeeService,
@@ -25,7 +27,16 @@ export class MeetingComponent {
     this.attendees = _attendeeService.attendees;
     this.actionsItems = _actionService.actionItems;
     this.meeting = this._meetingService.meeting;
-    debugger;
+    const me = this;
+    me.meetingAgendas = [];
+    this._meetingService.getMeeting('super_important_meeting_1', (data) => {
+      me._meeting = this._meetingService._meeting;
+      for (let o = 0; o < Object.keys(me._meeting.value.agendaItems).length; o++) {
+        me.meetingAgendas.push(me._meeting.value.agendaItems[Object.keys(me._meeting.value.agendaItems)[o]]);
+      }
+      debugger;
+    });
+
   }
 
   addAttendee(name: string) {

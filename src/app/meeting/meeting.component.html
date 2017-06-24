@@ -32,8 +32,7 @@
     <div *ngFor="let action of actionItems | async">{{attendee.name | json}}</div>
   </div>
 
-  <div *ngIf="(meeting | async)">
-    <h3 *ngFor="let agenda of meeting.agendaItems">{{ agenda.agendaItemName }}</h3>
-  </div>
+  <h3 *ngFor="let agenda of meetingAgendas">{{ agenda.agendaItemName }}</h3>
+
 </div>
 
