@@ -36,7 +36,7 @@ export class ActionService {
 
   }
 
-  getAttendees() {
+  getActions() {
     // this._http.get(backendUrl, options)
     //   .subscribe(result => {
     //     this.dataStore.attendees = result;
@@ -44,7 +44,7 @@ export class ActionService {
     //   })
   }
 
-  addAttendee(action: Action) {
+  addAction(action: Action) {
     // this._http.get(backendUrl, options)
     //   .subscribe(result => {
     //     // If result is successfull
@@ -56,17 +56,17 @@ export class ActionService {
     this._actions.next(Object.assign({}, this.dataStore).actions);
   }
 
-  getAttendee(id: number) {
+  getAction(id: number) {
     this.dataStore.currentAction = this.dataStore.actions.find(action => action.id === id);
     this._currentAction.next(Object.assign({}, this.dataStore).currentAction);
   }
 
-  editAttendee(action: Action) {
+  editAction(action: Action) {
     this.dataStore.actions.splice(action.id, 1, action)
     this._actions.next(Object.assign({}, this.dataStore).actions);
   }
 
-  removeAttendee(id: number) {
+  removeAction(id: number) {
     this.dataStore.actions.splice(id, 1)
     this._actions.next(Object.assign({}, this.dataStore).actions);
   }
