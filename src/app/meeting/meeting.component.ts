@@ -43,6 +43,10 @@ export class MeetingComponent {
     this._attendeeService.addAttendee(new Attendee(name));
   }
 
+  removeAttendee(name: string) {
+    this._attendeeService.removeAttendee(name);
+  }
+
   addAction(name: string) {
     this._actionService.addAction(new Action(name));
   }

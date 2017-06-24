@@ -1,35 +1,32 @@
 <h2>
-  {{ (meeting | async)?.meetingName}} Meeting Title - (Current Agenda item)
+  {{ (meeting | async)?.meetingName}} - (Current Agenda item)
 </h2>
 
 <div class="flex-container">
-  <div class="orc-left">
+  <div class="attendeePanel">
     <h5>Attendees</h5>
 
     <input #attendeeInput type="text" pInputText [(ngModel)]="attendeeName"/>
 
-    <button pButton type="button" (click)="addAttendee(attendeeInput.value)">Add Attendee</button>
-
-    <div *ngFor="let attendee of usersTest | async">{{attendee.name | json}}</div>
+    <button type="button" (click)="addAttendee(attendeeInput.value)">Add Attendee</button>
+    
+    <div class="attendeeContainer" *ngFor="let attendee of attendees | async">
+      <img src="http://via.placeholder.com/42x42" alt="" height="42px" width="42px" style="border-radius:50%;"> 
+      <p>{{attendee.name | json}}</p> 
+      <button class="btn-style" type="button" (click)="removeAttendee(attendeeInput.value)">x</button>
+    </div>
 
   </div>
 
-  <div class="orc-right">
+  <div class="actionPanel"> 
     <h5>Action points</h5>
-    <!--<ul>
-      <li> <input type="text" name="" value="position"> <img src="http://via.placeholder.com/42x42" height="42" width="42"> </li>
-      <li> <input type="text" name="" value="the"> <img src="http://via.placeholder.com/42x42" height="42" width="42"> </li>
-      <li> <input type="text" name="" value="legs"> <img src="http://via.placeholder.com/42x42" height="42" width="42"> </li>
-      <li> <input type="text" name="" value="and"> </li>
-      <li> <input type="text" name="" value="dat"> <img src="http://via.placeholder.com/42x42" height="42" width="42"> </li>
-    </ul>
-    <button type="button"> add new action point </button>-->
-
     <input #actionInput type="text" pInputText [(ngModel)]="actionName"/>
 
-    <button pButton type="button" (click)="addAction(actionInput.value)">Add Action</button>
+    <button type="button" (click)="addAction(actionInput.value)">Add Action</button>
 
-    <div *ngFor="let action of actionItems | async">{{attendee.name | json}}</div>
+    <div class="actionContainer">
+      <div *ngFor="let action of actionItems | async">{{action.name | json}}</div>
+    </div>
   </div>
 
   <h3 *ngFor="let agenda of meetingAgendas">{{ agenda.agendaItemName }}</h3>
