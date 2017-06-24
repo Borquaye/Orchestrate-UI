@@ -49,6 +49,7 @@ import {MdCardModule} from '@angular/material';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    BrowserAnimationsModule,
     InputTextModule,
     ButtonModule,
     MultiSelectModule,

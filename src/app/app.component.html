@@ -15,7 +15,7 @@
 
 <!--<div *ngFor="let attendee of attendees | async">{{attendee.username | json}}</div>-->
 
-<p-multiSelect [options]="results" [(ngModel)]="selectedItems"></p-multiSelect>
+<p-multiSelect [options]="results" [(ngModel)]="selectedItems" defaultLabel="Add Attendees"></p-multiSelect>
 
 
 <router-outlet></router-outlet>
