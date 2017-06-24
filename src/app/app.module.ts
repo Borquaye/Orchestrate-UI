@@ -29,7 +29,8 @@ import { ButtonModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MeetingService } from 'app/meeting/meeting.service';
-import {ActionService} from 'app/actions/action.service';
+import {ActionService} from 'app/actions/action.service'
+import {MultiSelectModule} from 'primeng/primeng';
 
 import {MdButtonModule} from '@angular/material';
 import {MdInputModule} from '@angular/material';
@@ -50,6 +51,7 @@ import {MdCardModule} from '@angular/material';
     AngularFireDatabaseModule,
     InputTextModule,
     ButtonModule,
+    MultiSelectModule,
     MdInputModule,
     MdButtonModule,
     MdCardModule

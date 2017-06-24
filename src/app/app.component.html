@@ -10,10 +10,12 @@
 <!--<input type="text" pInputText [(ngModel)]="attendeeName"/>-->
   <!--<input #attendeeInput type="text" pInputText [(ngModel)]="attendeeName"/>
 
-  <button pButton type="button" (click)="addAttendee(attendeeInput.value)" label="Add Attendee"></button>
+  <button pButton type="button" (click)="addAttendee(attendeeInput.value)" label="Add Attendee"></button>-->
 
 
-<div *ngFor="let attendee of attendees | async">{{attendee.username | json}}</div>-->
+<!--<div *ngFor="let attendee of attendees | async">{{attendee.username | json}}</div>-->
+
+<p-multiSelect [options]="results" [(ngModel)]="selectedItems"></p-multiSelect>
 
 
 <router-outlet></router-outlet>
