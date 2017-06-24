@@ -25,11 +25,14 @@ export class MeetingComponent {
     this.attendees = _attendeeService.attendees;
     this.actionsItems = _actionService.actionItems;
     this.meeting = this._meetingService.meeting;
-    debugger;
   }
 
   addAttendee(name: string) {
     this._attendeeService.addAttendee(new Attendee(name));
+  }
+
+  removeAttendee(name: string) {
+    this._attendeeService.removeAttendee(name);
   }
 
   addAction(name: string) {

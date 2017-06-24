@@ -25,7 +25,8 @@ export class AttendeeService {
   }
 
   removeAttendee(id: string) {
-
+    this.getAttendee(id);
+    this.attendee.remove();
   }
 
 }

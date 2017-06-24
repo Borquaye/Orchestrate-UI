@@ -3,7 +3,43 @@
    display: flex;
    -webkit-flex-direction: row;
    flex-direction: row;
-   justify-content: center;
+   justify-content: space-around;
+   padding: 0 15%;
+}
+
+.attendeePanel{
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row; 
+   flex-direction: column;
+   min-width: 24%;
+}
+
+.actionPanel{
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row; 
+   flex-direction: column;
+   min-width: 40%;
+}
+
+.attendeeContainer{
+   display: -webkit-flex;
+   display: flex;
+   justify-content: space-around;
+   padding: 10px 0;
+}
+
+.actionContainer{
+   display: -webkit-flex;
+   display: flex;
+   justify-content: space-around;
+}
+
+.btn-style{
+    border-radius: 50%;    
+    height: 20px;
+    width: 20px;
 }
 
 li {
