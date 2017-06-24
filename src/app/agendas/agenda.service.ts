@@ -7,65 +7,26 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 
 @Injectable()
 export class AgendaService {
-    private dataStore: {
-      agendas: Agenda[],
-      currentAgenda: Agenda
-  };
-
-  private _agendas: BehaviorSubject<Agenda[]>;
-  public agendas: Observable<Agenda[]>;
-
-  private _currentAgenda: BehaviorSubject<Agenda>;
-  public currentAgenda: Observable<Agenda>;
-
-  items: FirebaseListObservable<any[]>;
+  agendaItems: FirebaseListObservable<any[]>;
 
 
   constructor(private _http: Http, db: AngularFireDatabase) {
-    this.dataStore = {
-      agendas: [
-        { id: 1, name: 'Recording transcripts'},
-        { id: 2, name: 'Follow-up meetings'},
-        { id: 3, name: 'Random stuff'}
-      ],
-      currentAgenda: null
-    }
-
-    this._agendas =  <BehaviorSubject<Agenda[]>>new BehaviorSubject([]);
-    this.agendas = this._agendas.asObservable();
-
-    this._currentAgenda =  <BehaviorSubject<Agenda>>new BehaviorSubject({});
-    this.currentAgenda = this._currentAgenda.asObservable();
-
-    this.items = db.list('/items');
-  }
-
-  getAgendas() {
-    // this._http.get(backendUrl, options)
-    //   .subscribe(result => {
-    //     this.dataStore.attendees = result;
-    //     this._attendees.next(Object.assign({}, this.dataStore).attendees);
-    //   })
+    this.agendaItems = db.list('https://meetinganalasys.firebaseio.com/new');
   }
 
   addAgenda(agenda: Agenda) {
-    this.dataStore.agendas.push(agenda)
-    this._agendas.next(Object.assign({}, this.dataStore).agendas);
+    this.agendaItems.push(agenda);
   }
 
   getAgenda(id: number) {
-    this.dataStore.currentAgenda = this.dataStore.agendas.find(agenda => agenda.id === id);
-    this._currentAgenda.next(Object.assign({}, this.dataStore).currentAgenda);
+
   }
 
-  editAgenda(agenda: Agenda) {
-    this.dataStore.agendas.splice(agenda.id, 1, agenda)
-    this._agendas.next(Object.assign({}, this.dataStore).agendas);
+  editAttendee(attendee: Agenda) {
+
   }
 
-  removeAgenda(id: number) {
-    this.dataStore.agendas.splice(id, 1)
-    this._agendas.next(Object.assign({}, this.dataStore).agendas);
-  }
+  removeAttendee(id: number) {
 
+  }
 }
