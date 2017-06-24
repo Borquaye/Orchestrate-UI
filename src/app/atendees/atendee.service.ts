@@ -16,9 +16,7 @@ export class AtendeeService {
 
   private _currentAttendee: BehaviorSubject<Attendee>;
   public currentAttendee: Observable<Attendee>;
-
-
-
+  
   constructor(private _http: Http) {
     this.dataStore = {
       attendees: [
