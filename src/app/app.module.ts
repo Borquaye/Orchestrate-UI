@@ -29,7 +29,8 @@ import { ButtonModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MeetingService } from 'app/meeting/meeting.service';
-import {ActionService} from 'app/actions/action.service';
+import {ActionService} from 'app/actions/action.service'
+import {MultiSelectModule} from 'primeng/primeng';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import {ActionService} from 'app/actions/action.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    MultiSelectModule
   ],
   providers: [
     AgendaService,

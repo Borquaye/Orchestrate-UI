@@ -6,6 +6,8 @@ import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} f
 
 @Injectable()
 export class AttendeeService {
+    _attendees: any[];
+    _attendee: any;
   attendees: FirebaseListObservable<any[]>;
   attendee: FirebaseObjectObservable<any>;
 
@@ -16,16 +18,37 @@ export class AttendeeService {
     this.attendees.push(attendee);
   }
 
-  getAttendee(id: string) {
-    this.attendee = this.db.object('https://meetinganalasys.firebaseio.com/new/' + id);
+  getAttendee(key: string, afterFirebase: Function) {
+      this.db.object('https://meetinganalasys.firebaseio.com/users/' + key, { preserveSnapshot: true})
+      .subscribe(snapshot => {
+        const currentObject = { key: snapshot.key, value: snapshot.val() }
+        this._attendee = currentObject;
+        if (afterFirebase != null) {
+          afterFirebase(currentObject);
+        }
+      });
   }
-
+  getAttendees(afterFirebase: Function) {
+      this.db.object('https://meetinganalasys.firebaseio.com/users/', { preserveSnapshot: true})
+      .subscribe(snapshots => {
+        let tempArray = [];
+        snapshots.forEach(snapshot => {
+          const currentObject = {key: snapshot.key, value: snapshot.val()};
+          tempArray.push(currentObject);
+          // console.log(snapshot.key, snapshot.val());
+        });
+        this._attendees = tempArray;
+        if (afterFirebase != null) {
+          afterFirebase(tempArray);
+        }
+        tempArray = [];
+      });
+  }
   editAttendee(attendee: Attendee) {
 
   }
 
   removeAttendee(id: string) {
-    this.getAttendee(id);
     this.attendee.remove();
   }
 

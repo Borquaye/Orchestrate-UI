@@ -6,7 +6,7 @@ import {Agenda} from 'app/agendas/agenda.model';
 import {Attendee} from 'app/attendees/attendee.model';
 import { Action } from 'rxjs/scheduler/Action';
 import { FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from 'rxjs/Subscription';
 
 @Injectable()
 export class MeetingService {
@@ -17,7 +17,7 @@ export class MeetingService {
   _meetings: any [];
 
   constructor(private db: AngularFireDatabase) {
-    // db.list('https://meetinganalasys.firebaseio.com/meetings/super_important_meeting_1', { preserveSnapshot: true})
+    // db.list('https://meetinganalasys.firebaseio.com/meetings/', { preserveSnapshot: true})
     //   .subscribe(snapshot => {
     //     let tempArray = [];
     //     // snapshots.forEach(snapshot => {
@@ -28,8 +28,8 @@ export class MeetingService {
     //     this._meetings = tempArray;
     //     tempArray = [];
     //   });
-
-      this.getMeeting('super_important_meeting_1', null);
+    this.meeting = this.db.object('https://meetinganalasys.firebaseio.com/meetings/super_important_meeting_1');
+    this.getMeeting('super_important_meeting_1', null);
   }
 
   getMeetings() {
