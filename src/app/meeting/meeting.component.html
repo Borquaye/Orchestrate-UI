@@ -1,8 +1,12 @@
-<h2>
-  {{ (meeting | async)?.meetingName}} - (Current Agenda item)
-</h2>
+<md-card class="wrapMan">
 
-<div class="flex-container">
+<md-card-title>
+  <h2>
+    {{ (meeting | async)?.meetingName}} - (Current Agenda item)
+  </h2>
+</md-card-title>
+
+<md-card-content class="flex-container">
   <div class="attendeePanel">
     <h5>Attendees</h5>
     <md-input-container>
@@ -32,5 +36,6 @@
 
   <h3 *ngFor="let agenda of meetingAgendas">{{ agenda.agendaItemName }}</h3>
 
-</div>
+</md-card-content>
+</md-card>
 
