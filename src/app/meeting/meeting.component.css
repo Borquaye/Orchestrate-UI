@@ -28,21 +28,17 @@
 .attendeeContainer{
    display: -webkit-flex;
    display: flex;
-   justify-content: space-around;
-   padding: 10px 0;
+   justify-content: space-between;
+   padding: 10px 10px;
+   width: 230px;
 }
 
 .actionContainer{
    display: -webkit-flex;
    display: flex;
-   justify-content: space-around;
+   justify-content: space-between;
 }
 
-.btn-style{
-    border-radius: 50%;    
-    height: 20px;
-    width: 20px;
-}
 
 li {
     list-style: none;

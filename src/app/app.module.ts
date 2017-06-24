@@ -31,6 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MeetingService } from 'app/meeting/meeting.service';
 import {ActionService} from 'app/actions/action.service';
 
+import {MdButtonModule} from '@angular/material';
+import {MdInputModule} from '@angular/material';
+import {MdCardModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import {ActionService} from 'app/actions/action.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    MdInputModule,
+    MdButtonModule,
+    MdCardModule
   ],
   providers: [
     AgendaService,
