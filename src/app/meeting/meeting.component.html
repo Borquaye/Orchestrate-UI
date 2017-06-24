@@ -5,24 +5,31 @@
 <div class="flex-container">
   <div class="orc-left">
     <h5>Attendees</h5>
-    <ul>
-      <li> <input type="text" name="" value="man"> </li>
-      <li> <input type="text" name="" value="like"> </li>
-      <li> <input type="text" name="" value="skutnur"> </li>
-    </ul>
-    <button type="button"> add new attendee </button>
+
+    <input #attendeeInput type="text" pInputText [(ngModel)]="attendeeName"/>
+
+    <button pButton type="button" (click)="addAttendee(attendeeInput.value)">Add Attendee</button>
+
+    <div *ngFor="let attendee of usersTest | async">{{attendee.name | json}}</div>
+
   </div>
 
   <div class="orc-right">
     <h5>Action points</h5>
-    <ul>
+    <!--<ul>
       <li> <input type="text" name="" value="position"> <img src="http://via.placeholder.com/42x42" height="42" width="42"> </li>
       <li> <input type="text" name="" value="the"> <img src="http://via.placeholder.com/42x42" height="42" width="42"> </li>
       <li> <input type="text" name="" value="legs"> <img src="http://via.placeholder.com/42x42" height="42" width="42"> </li>
       <li> <input type="text" name="" value="and"> </li>
       <li> <input type="text" name="" value="dat"> <img src="http://via.placeholder.com/42x42" height="42" width="42"> </li>
     </ul>
-    <button type="button"> add new action point </button>
+    <button type="button"> add new action point </button>-->
+
+    <input #actionInput type="text" pInputText [(ngModel)]="actionName"/>
+
+    <button pButton type="button" (click)="addAction(actionInput.value)">Add Action</button>
+
+    <div *ngFor="let action of actionItems | async">{{attendee.name | json}}</div>
   </div>
 
   <div *ngIf="(meeting | async)">

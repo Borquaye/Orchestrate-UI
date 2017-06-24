@@ -1,5 +1,5 @@
 export class Attendee {
-    id: number;
+    id: string;
     name: string;
 
     constructor(_name: string) {

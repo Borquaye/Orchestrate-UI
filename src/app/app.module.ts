@@ -29,7 +29,7 @@ import { ButtonModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MeetingService } from 'app/meeting/meeting.service';
-
+import {ActionService} from 'app/actions/action.service';
 
 
 @NgModule({
@@ -51,7 +51,8 @@ import { MeetingService } from 'app/meeting/meeting.service';
   providers: [
     AgendaService,
     AttendeeService,
-    MeetingService
+    MeetingService,
+    ActionService
   ],
   bootstrap: [AppComponent]
 })
