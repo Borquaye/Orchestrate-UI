@@ -2,41 +2,19 @@ import { Injectable } from '@angular/core';
 import {Meeting} from 'app/meeting/meeting.model';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
-import {Http} from '@angular/http/http';
 import {Agenda} from 'app/agendas/agenda.model';
 import {Attendee} from 'app/attendees/attendee.model';
-import {Action} from 'rxjs/scheduler/Action';
+import { Action } from 'rxjs/scheduler/Action';
+import { FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Injectable()
 export class MeetingService {
+  meetings: FirebaseListObservable<any[]>;
+  meeting: FirebaseObjectObservable<any>;
 
-private dataStore: {
-    meetings: Meeting[],
-    currentMeeting: Meeting
-  };
-
-  private _meetings: BehaviorSubject<Meeting[]>;
-  public meetings: Observable<Meeting[]>;
-
-  private _currentMeeting: BehaviorSubject<Meeting>;
-  public currentMeeting: Observable<Meeting>;
-
-  constructor(private _http: Http) {
-    this.dataStore = {
-      meetings: [
-        { title: 'bits', attendees : [], agendaItems: [] },
-        { title: 'get', attendees : [], agendaItems: []},
-        { title: 'done', attendees : [], agendaItems: [] }
-      ],
-      currentMeeting: null
-    }
-
-    this._meetings =  <BehaviorSubject<Meeting[]>>new BehaviorSubject([]);
-    this.meetings = this._meetings.asObservable();
-
-    this._currentMeeting =  <BehaviorSubject<Meeting>>new BehaviorSubject({});
-    this.currentMeeting = this._currentMeeting.asObservable();
-
+  constructor(db: AngularFireDatabase) {
+    this.meetings = db.list('https://meetinganalasys.firebaseio.com/meetings');
+    this.meeting = db.object('https://meetinganalasys.firebaseio.com/meetings/super_important_meeting_1');
   }
 
   getMeetings() {
@@ -48,29 +26,18 @@ private dataStore: {
   }
 
   addMeeting(meeting: Meeting) {
-    // this._http.get(backendUrl, options)
-    //   .subscribe(result => {
-    //     // If result is successfull
-    //     this.dataStore.attendees.push(attendee)
-    //     this._attendees.next(Object.assign({}, this.dataStore).attendees);
-    //   })
 
-    this.dataStore.meetings.push(meeting)
-    this._meetings.next(Object.assign({}, this.dataStore).meetings);
   }
 
   getMeeting(title: string) {
-    this.dataStore.currentMeeting = this.dataStore.meetings.find(meeting => meeting.title === title);
-    this._currentMeeting.next(Object.assign({}, this.dataStore).currentMeeting);
+
   }
 
   editMeeting(meeting: Meeting) {
-    this.dataStore.meetings.splice(1, 1, meeting)
-    this._meetings.next(Object.assign({}, this.dataStore).meetings);
+
   }
 
   removeMeeting(id: number) {
-    this.dataStore.meetings.splice(id, 1)
-    this._meetings.next(Object.assign({}, this.dataStore).meetings);
+
   }
 }

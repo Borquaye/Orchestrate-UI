@@ -1,5 +1,5 @@
 <h2>
-  {{meeting.title}} Meeting Title - (Current Agenda item)
+  {{ (meeting | async)?.meetingName}} Meeting Title - (Current Agenda item)
 </h2>
 
 <div class="flex-container">
@@ -23,6 +23,10 @@
       <li> <input type="text" name="" value="dat"> <img src="http://via.placeholder.com/42x42" height="42" width="42"> </li>
     </ul>
     <button type="button"> add new action point </button>
+  </div>
+
+  <div *ngIf="(meeting | async)">
+    <h3 *ngFor="let agenda of meeting.agendaItems">{{ agenda.agendaItemName }}</h3>
   </div>
 </div>
 

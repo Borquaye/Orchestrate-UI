@@ -27,6 +27,8 @@ import { AttendeeService } from 'app/attendees/attendee.service';
 import { InputTextModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MeetingService } from 'app/meeting/meeting.service';
 
 
 
@@ -48,7 +50,8 @@ import { FormsModule } from '@angular/forms';
   ],
   providers: [
     AgendaService,
-    AttendeeService
+    AttendeeService,
+    MeetingService
   ],
   bootstrap: [AppComponent]
 })

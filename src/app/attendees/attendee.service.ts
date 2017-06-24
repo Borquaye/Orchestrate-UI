@@ -12,7 +12,7 @@ export class AttendeeService {
 
 
   constructor(private _http: Http, db: AngularFireDatabase) {
-    this.attendees = db.list('https://meetinganalasys.firebaseio.com/new');
+    this.attendees = db.list('https://meetinganalasys.firebaseio.com/users');
   }
 
   getAttendees() {
@@ -32,11 +32,9 @@ export class AttendeeService {
   }
 
   editAttendee(attendee: Attendee) {
-
   }
 
   removeAttendee(id: number) {
-
   }
 
 }

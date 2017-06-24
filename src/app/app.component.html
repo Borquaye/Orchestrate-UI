@@ -12,5 +12,5 @@
 
 <button pButton type="button" (click)="addAttendee(attendeeInput.value)" label="Add Attendee"></button>
 
-<div *ngFor="let attendee of usersTest | async">{{attendee.name | json}}</div>
+<div *ngFor="let attendee of attendees | async">{{attendee.username | json}}</div>
 <router-outlet></router-outlet>

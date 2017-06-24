@@ -19,7 +19,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "orc",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "https://fonts.googleapis.com/icon?family=Material+Icons",
+        "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js"
