@@ -2,16 +2,21 @@
 
 <md-card-title>
   <h2>
-    {{ (meeting | async)?.meetingName}} - (Current Agenda item)
+    {{ (meeting | async)?.meetingName}}
   </h2>
+  <h3>
+    {{ currentAgenda.agendaItemName }}
+  </h3>
 </md-card-title>
 
 <md-card-content class="flex-container">
   <div class="attendeePanel">
-    <h5>Attendees</h5>
-    <md-input-container>
+    <h2>Attendees</h2>
+    <!--<md-input-container>
         <input mdInput #attendeeInput type="text" pInputText [(ngModel)]="attendeeName"/>
-    </md-input-container>
+    </md-input-container>-->
+    <p-multiSelect [options]="results" [(ngModel)]="selectedItems" defaultLabel="People"></p-multiSelect>
+
     <button md-button type="button" (click)="addAttendee(attendeeInput.value)">Add Attendee</button>
     
     <md-card class="attendeeContainer" *ngFor="let attendee of attendees | async">
@@ -23,7 +28,7 @@
   </div>
 
   <div class="actionPanel"> 
-    <h5>Action points</h5>
+    <h2>Action points</h2>
     <md-input-container>
       <input mdInput #actionInput type="text" pInputText [(ngModel)]="actionName"/>
     </md-input-container>
@@ -34,7 +39,7 @@
     </md-card>
   </div>
 
-  <h3 *ngFor="let agenda of meetingAgendas">{{ agenda.agendaItemName }}</h3>
+  <!--<h3 *ngFor="let agenda of meetingAgendas">{{ agenda.agendaItemName }}</h3>-->
 
 </md-card-content>
 </md-card>

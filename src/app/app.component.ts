@@ -14,7 +14,7 @@ import {SelectItem} from 'primeng/primeng';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'orc';
+  title = 'Orchestra';
   attendeeName: string;
   attendees: any[]; // FirebaseListObservable<Attendee[]>;
   results: SelectItem[];

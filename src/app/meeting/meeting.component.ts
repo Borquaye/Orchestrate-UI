@@ -4,7 +4,8 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
 import {AttendeeService} from 'app/attendees/attendee.service';
 import {Attendee} from 'app/attendees/attendee.model';
 import {ActionService} from 'app/actions/action.service';
-import {Action} from 'app/actions/action.model';
+import { Action } from 'app/actions/action.model';
+import { SelectItem } from 'primeng/primeng';
 
 @Component({
   selector: 'orc-meeting',
@@ -18,6 +19,10 @@ export class MeetingComponent {
   actionsItems: FirebaseListObservable < any[] >;
   attendees: FirebaseListObservable < Attendee[] >;
   meetingAgendas: any[];
+  currentAgenda: any;
+
+  users: any[];
+  results: SelectItem[];
 
   constructor(
         private _attendeeService: AttendeeService,
@@ -34,6 +39,17 @@ export class MeetingComponent {
       for (let o = 0; o < Object.keys(me._meeting.value.agendaItems).length; o++) {
         me.meetingAgendas.push(me._meeting.value.agendaItems[Object.keys(me._meeting.value.agendaItems)[o]]);
       }
+      me.currentAgenda = me.meetingAgendas[0];
+    });
+
+    me.users = [];
+    this._attendeeService.getAttendees((data) => {
+      me.users = data;
+      const temp = [];
+      for (let i = 0; i < me.users.length; i++) {
+        temp.push({ label: me.users[i].value.username, value: me.users[i].value.username})
+      }
+      me.results = temp;
     });
 
   }
