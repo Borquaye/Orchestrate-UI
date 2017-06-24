@@ -5,28 +5,29 @@
 <div class="flex-container">
   <div class="attendeePanel">
     <h5>Attendees</h5>
-
-    <input #attendeeInput type="text" pInputText [(ngModel)]="attendeeName"/>
-
-    <button type="button" (click)="addAttendee(attendeeInput.value)">Add Attendee</button>
+    <md-input-container>
+        <input mdInput #attendeeInput type="text" pInputText [(ngModel)]="attendeeName"/>
+    </md-input-container>
+    <button md-button type="button" (click)="addAttendee(attendeeInput.value)">Add Attendee</button>
     
-    <div class="attendeeContainer" *ngFor="let attendee of attendees | async">
+    <md-card class="attendeeContainer" *ngFor="let attendee of attendees | async">
       <img src="http://via.placeholder.com/42x42" alt="" height="42px" width="42px" style="border-radius:50%;"> 
       <p>{{attendee.name | json}}</p> 
-      <button class="btn-style" type="button" (click)="removeAttendee(attendeeInput.value)">x</button>
-    </div>
+      <button md-button class="btn-style" type="button" (click)="removeAttendee(attendeeInput.value)">x</button>
+    </md-card>
 
   </div>
 
   <div class="actionPanel"> 
     <h5>Action points</h5>
-    <input #actionInput type="text" pInputText [(ngModel)]="actionName"/>
+    <md-input-container>
+      <input mdInput #actionInput type="text" pInputText [(ngModel)]="actionName"/>
+    </md-input-container>
+    <button md-button type="button" (click)="addAction(actionInput.value)">Add Action</button>
 
-    <button type="button" (click)="addAction(actionInput.value)">Add Action</button>
-
-    <div class="actionContainer">
+    <md-card class="actionContainer">
       <div *ngFor="let action of actionItems | async">{{action.name | json}}</div>
-    </div>
+    </md-card>
   </div>
 
   <h3 *ngFor="let agenda of meetingAgendas">{{ agenda.agendaItemName }}</h3>

@@ -32,6 +32,9 @@ import { MeetingService } from 'app/meeting/meeting.service';
 import {ActionService} from 'app/actions/action.service'
 import {MultiSelectModule} from 'primeng/primeng';
 
+import {MdButtonModule} from '@angular/material';
+import {MdInputModule} from '@angular/material';
+import {MdCardModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import {MultiSelectModule} from 'primeng/primeng';
     AngularFireDatabaseModule,
     InputTextModule,
     ButtonModule,
-    MultiSelectModule
+    MultiSelectModule,
+    MdInputModule,
+    MdButtonModule,
+    MdCardModule
   ],
   providers: [
     AgendaService,
