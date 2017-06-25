@@ -51,11 +51,12 @@ export class AppComponent implements OnInit {
       onMessageSent.subscribe((msg: any) => {
 
         const intent = msg.intent;
-        const entity = msg.entity;
+        const entities = msg.entities;
 
         console.log('intent: ' + intent);
-        console.log('entity: ' + entity);
-
+        if(entities.length > 0) { 
+          console.log('first entity: ' + entities[0].entity + " confidence:" + entities[0].score);
+        }
       });
 
     });
