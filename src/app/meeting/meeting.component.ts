@@ -153,10 +153,10 @@ export class MeetingComponent implements OnInit {
       case INTENTS.PREVIOUS_AGENDA: {
         break;
       }
-      case INTENTS.NEXT_AGENDA: {
+      case "NextAgenda": {
         break;
       }
-      case INTENTS.ADD_TASK: {
+      case "AddTask": {
         if (entities.length > 0) {
           // toast message
         } else {
@@ -166,7 +166,7 @@ export class MeetingComponent implements OnInit {
         }
         break;
       }
-      case INTENTS.ASSIGN_USER_TO_TASK: {
+      case "AssignUserToTask": {
         if (entities.length > 0) {
           // toast message
         } else {
@@ -174,7 +174,7 @@ export class MeetingComponent implements OnInit {
         }
         break;
       }
-      case INTENTS.NONE: {
+      default: {
         break;
       }
     }
