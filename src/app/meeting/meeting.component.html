@@ -32,7 +32,7 @@
 
           <div *ngIf="agenda.actions">
             <md-card class="actionContainer" *ngFor="let action of agenda.actions">
-              <button md-mini-fab><md-icon>{{action.attendee.initials}}</md-icon></button>
+              <button md-mini-fab><md-icon>{{action.assignee.initials}}</md-icon></button>
               <p>{{action.name}}</p> 
               <p>{{action.status}}</p> 
               <p>{{action.deadline}}</p> 
