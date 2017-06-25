@@ -33,8 +33,10 @@ export class MeetingComponent implements OnInit {
   theAgenda: Agenda;
   selectedItems: any;
   usrs: any[];
+  agendaNames: string[];
   currentAction: any;
 
+  tabIndex: number;
   constructor(
         private _attendeeService: AttendeeService,
         private _actionService: ActionService,
@@ -47,23 +49,27 @@ export class MeetingComponent implements OnInit {
     this.actionsItems = _actionService.actionItems;
     this.meeting = this._meetingService.meeting;
     const me = this;
+    this.tabIndex = 0;
     me.meetingAgendas = [];
-
+    me.agendaNames = [];
     this._meetingService.getMeeting('super_important_meeting_1', (data) => {
       me._meeting = this._meetingService._meeting;
       for (let o = 0; o < Object.keys(me._meeting.value.agendaItems).length; o++) {
         me.meetingAgendas.push(me._meeting.value.agendaItems[Object.keys(me._meeting.value.agendaItems)[o]]);
         //
+        me.agendaNames.push(me.meetingAgendas[o].agendaItemName);
       }
       me.currentAgenda = me.meetingAgendas[0];
     });
 
     me.users = [];
+
     this._attendeeService.getAttendees((data) => {
       me.users = data;
       const temp = [];
       for (let i = 0; i < me.users.length; i++) {
         temp.push({ label: me.users[i].value.username, value: me.users[i].value.username})
+
       }
       // me.results = temp;
     });
@@ -73,19 +79,22 @@ export class MeetingComponent implements OnInit {
       new Attendee('Amaris', 'AP'),
       new Attendee('Joe', 'JP'),
       new Attendee('Sam', 'SH'),
-      new Attendee('Mike', 'MK')
+      new Attendee('Mike', 'MK'),
+      new Attendee('Daniel', 'DB'),
+      new Attendee('Colin', 'CB'),
+      new Attendee('Audience', 'A'),
     ];
 
     const ag1 = new Agenda('Discuss The Problem');
     const ag2 = new Agenda('The Solution');
-    const ac = new Action('Capture meeting audio');
-    //ac.assignee = 'Kiran';
-    ac.assignee = new Attendee('Kiran', 'KR')
-    const ac2 = new Action('Do what you will');
-    //ac2.assignee = 'Kiran';
-    ac2.assignee = new Attendee('Kiran', 'KR')
-    ag1.actions.push(ac2);
-    ag2.actions.push(ac);
+    // const ac = new Action('Capture meeting audio');
+    // ac.assignee = 'Kiran';
+    // ac.assignee = new Attendee('Kiran', 'KR')
+    // const ac2 = new Action('Do what you will');
+    // ac2.assignee = 'Kiran';
+    // ac2.assignee = new Attendee('Kiran', 'KR')
+    // ag1.actions.push(ac2);
+    // ag2.actions.push(ac);
     const ag3 = new Agenda('Questions & Answers');
     const ag  = [ag1, ag2, ag3];
     this.mainMeeting = new Meeting(
@@ -147,13 +156,24 @@ export class MeetingComponent implements OnInit {
 
     });
   }
-
+  nextAgenda() {
+    this.tabIndex = (this.tabIndex + 1) % this.meetingAgendas.length;
+  }
+  previousAgenda() {
+    this.tabIndex = (this.tabIndex - 1) % this.meetingAgendas.length;
+    if (this.tabIndex < 0) {
+      this.tabIndex = this.meetingAgendas.length;
+    }
+  }
   processIntent(intent: any, entities: any[]) {
     switch (intent) {
       case INTENTS.PREVIOUS_AGENDA: {
+        this.previousAgenda();
         break;
       }
       case "NextAgenda": {
+        this.nextAgenda();
+
         break;
       }
       case "AddTask": {

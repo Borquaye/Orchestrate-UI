@@ -56,3 +56,13 @@ body{
 .mat-tab-body-wrapper {
     height: 100% !important;
 }
+.leftFooter{
+    float:left;
+    left:20px;
+    position: absolute;
+}
+.rightFooter{
+    float:right;
+    right:20px;
+    position: absolute;
+}
