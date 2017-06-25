@@ -4,7 +4,7 @@
     </h2>
     
   <md-tab-group>
-    <md-tab label={{agenda.agendaItemName}} *ngFor="let agenda of meetingAgendas">
+    <md-tab label={{agenda.name}} *ngFor="let agenda of mainMeeting.agendaItems">
       <div class="flex-container">
         <div class="attendeePanel">
           <h3>Attendees</h3>
@@ -29,7 +29,7 @@
             <button md-button type="button" (click)="addAction(actionInput.value)">Add Action</button>
           </div>
 
-          <md-card class="actionContainer" *ngFor="let action of agenda.action.actions">
+          <md-card class="actionContainer" *ngFor="let action of agenda.actions">
             <!--<button md-mini-fab><md-icon>{{action.initials }}</md-icon></button>-->
             <button md-mini-fab><md-icon>KK</md-icon></button>
             <p>{{action.name}}</p> 
