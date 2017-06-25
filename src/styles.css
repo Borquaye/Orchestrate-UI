@@ -4,6 +4,10 @@ html{
 }
 body{
     background-color: #ecf0f1;
+    background-image: url("assets/breather-163392.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: 'Roboto', sans-serif;
     margin: 0;
 }
@@ -17,6 +21,10 @@ body{
 .headMan{
     height: 100px;
     background-color: #bdc3c7;
+    background-image: url("assets/arindam-mahanta-217437.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     width: 100vw;
     padding: 0;
     margin: 0;
