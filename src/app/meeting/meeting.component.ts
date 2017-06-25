@@ -16,7 +16,7 @@ import {MdSnackBar} from "@angular/material";
 export class MeetingComponent {
   meeting: FirebaseObjectObservable<any>;
   _meeting: any;
-  actionsItems: FirebaseListObservable < any[]   >;
+  actionsItems: FirebaseListObservable < any[]>;
   attendees: FirebaseListObservable < Attendee[] >;
   meetingAgendas: any[];
 
