@@ -7,7 +7,7 @@
 }
 
 .wrapMan{
-      margin: 0 15%; 
+      margin: 3% 15%; 
 }
 
 .attendeePanel{
@@ -15,7 +15,7 @@
    display: flex;
    -webkit-flex-direction: row; 
    flex-direction: column;
-   min-width: 24%;
+   min-width: 28%;
    padding: 0 7%;
 }
 
@@ -42,10 +42,21 @@
    justify-content: space-between;
 }
 
+.btn-del{
+    color: red;
+}
 
-li {
-    list-style: none;
+.adders{
     display: flex;
-    flex-direction: row;
-    padding: 10px;
+    flex-direction: column;
+    width: 100%;
+    padding: 25px 0;
+}
+
+md-card {
+    margin-bottom: 10px;
+}
+
+md-card > img{
+    margin: auto 0;
 }
