@@ -49,7 +49,7 @@ export class MeetingComponent implements OnInit {
     this.actionsItems = _actionService.actionItems;
     this.meeting = this._meetingService.meeting;
     const me = this;
-    this.tabIndex=0;
+    this.tabIndex = 0;
     me.meetingAgendas = [];
     me.agendaNames = [];
     this._meetingService.getMeeting('super_important_meeting_1', (data) => {
@@ -63,13 +63,13 @@ export class MeetingComponent implements OnInit {
     });
 
     me.users = [];
-    
+
     this._attendeeService.getAttendees((data) => {
       me.users = data;
       const temp = [];
       for (let i = 0; i < me.users.length; i++) {
         temp.push({ label: me.users[i].value.username, value: me.users[i].value.username})
-        
+
       }
       // me.results = temp;
     });
@@ -153,12 +153,12 @@ export class MeetingComponent implements OnInit {
 
     });
   }
-  nextAgenda(){
+  nextAgenda() {
     this.tabIndex = (this.tabIndex + 1) % this.meetingAgendas.length;
   }
-  previousAgenda(){
-    this.tabIndex = (this.tabIndex -1) % this.meetingAgendas.length;
-    if (this.tabIndex<0){
+  previousAgenda() {
+    this.tabIndex = (this.tabIndex - 1) % this.meetingAgendas.length;
+    if (this.tabIndex < 0) {
       this.tabIndex = this.meetingAgendas.length;
     }
   }
