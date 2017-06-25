@@ -5,7 +5,7 @@ import { SignalR, BroadcastEventListener } from 'ng2-signalr';
 import {AttendeeService} from 'app/attendees/attendee.service';
 import {Attendee} from 'app/attendees/attendee.model';
 import {ActionService} from 'app/actions/action.service';
-import {MdSnackBar} from "@angular/material";
+import {MdSnackBar} from '@angular/material';
 import { Action } from 'app/actions/action.model';
 import { SelectItem } from 'primeng/primeng';
 import { Meeting } from 'app/meeting/meeting.model';
@@ -33,6 +33,7 @@ export class MeetingComponent implements OnInit {
   theAgenda: Agenda;
   selectedItems: any;
   usrs: any[];
+  currentAction: any;
 
   constructor(
         private _attendeeService: AttendeeService,
@@ -55,7 +56,6 @@ export class MeetingComponent implements OnInit {
         //
       }
       me.currentAgenda = me.meetingAgendas[0];
-      debugger;
     });
 
     me.users = [];
@@ -79,9 +79,11 @@ export class MeetingComponent implements OnInit {
     const ag1 = new Agenda('Discuss The Problem');
     const ag2 = new Agenda('The Solution');
     const ac = new Action('Capture meeting audio');
-    ac.assignee = 'Kiran';
+    //ac.assignee = 'Kiran';
+    ac.assignee = new Attendee('Kiran', 'KR')
     const ac2 = new Action('Do what you will');
-    ac2.assignee = 'Kiran';
+    //ac2.assignee = 'Kiran';
+    ac2.assignee = new Attendee('Kiran', 'KR')
     ag1.actions.push(ac2);
     ag2.actions.push(ac);
     const ag3 = new Agenda('Questions & Answers');
@@ -111,7 +113,7 @@ export class MeetingComponent implements OnInit {
       }
 
     this.mainMeeting.attendees = tmp;
-    this.snackBar.open("Successfully added attendees","Dismiss",{
+    this.snackBar.open('Successfully added attendees', 'Dismiss', {
       duration: 5000
     });
   }
@@ -155,11 +157,21 @@ export class MeetingComponent implements OnInit {
         break;
       }
       case INTENTS.ADD_TASK: {
-        // this.theAgenda.actions.push( { name: '' } )
+        if (entities.length > 0) {
+          // toast message
+        } else {
+          const action = new Action(entities[0]);
+          this.theAgenda.actions.push(action)
+          this.currentAction = action;
+        }
         break;
       }
       case INTENTS.ASSIGN_USER_TO_TASK: {
-        // this.currentTask.assignee = this.usrs.find(user => user.name === this.selectedItems[i]).initials)
+        if (entities.length > 0) {
+          // toast message
+        } else {
+          this.currentAction.assignee = this.usrs.find(user => user.name === entities[0]);
+        }
         break;
       }
       case INTENTS.NONE: {
