@@ -30,13 +30,15 @@
             <button md-button type="button" (click)="addAction(actionInput.value)">Add Action</button>
           </div>
 
-          <md-card class="actionContainer" *ngFor="let action of agenda.actions">
-            <!--<button md-mini-fab><md-icon>{{action.initials }}</md-icon></button>-->
-            <button md-mini-fab><md-icon>KK</md-icon></button>
-            <p>{{action.name}}</p> 
-            <p>{{action.status}}</p> 
-            <p>{{action.deadline}}</p> 
-          </md-card>
+          <div *ngIf="theAgenda.action">
+            <md-card class="actionContainer" *ngFor="let action of theAgenda.action.actions">
+              <button md-mini-fab><md-icon>{{action.attendee.initials}}</md-icon></button>
+              <p>{{action.name}}</p> 
+              <p>{{action.status}}</p> 
+              <p>{{action.deadline}}</p> 
+            </md-card>
+          </div>
+
         </div>
       </div>
     </md-tab>
