@@ -55,6 +55,7 @@ export class MeetingComponent implements OnInit {
         //
       }
       me.currentAgenda = me.meetingAgendas[0];
+      debugger;
     });
 
     me.users = [];

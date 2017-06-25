@@ -4,7 +4,7 @@
     </h2>
     
   <md-tab-group>
-    <md-tab label={{theAgenda.name}} *ngFor="let agenda of meetingAgendas">
+    <md-tab label={{agenda.agendaItemName}} *ngFor="let agenda of meetingAgendas">
       <div class="flex-container">
         <div class="attendeePanel">
           <h3>Attendees</h3>
