@@ -14,7 +14,7 @@ import { INTENTS } from 'app/shared/intents.enum';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Orchestra';
   attendeeName: string;
   attendees: any[]; // FirebaseListObservable<Attendee[]>;
@@ -44,49 +44,8 @@ export class AppComponent implements OnInit {
     // this.attendees = _attendeeService.attendees;
   }
 
-  ngOnInit() {
-    this._signalR.connect().then((c) => {
-
-      const onMessageSent = new BroadcastEventListener<any>('SpeechRecognised');
-      c.listen(onMessageSent)
-      onMessageSent.subscribe((msg: any) => {
-
-        const intent = msg.intent;
-        const entities = msg.entities;
-
-        console.log('intent: ' + intent);
-        if (entities.length > 0) {
-          console.log('first entity: ' + entities[0].entity + ' confidence:' + entities[0].score);
-        }
-
-        this.processIntent(intent, entities);
-      });
-
-    });
-  }
-
-  processIntent(intent: any, entities: any[]) {
-    switch (intent) {
-      case INTENTS.PREVIOUS_AGENDA: {
-        break;
-      }
-      case INTENTS.NEXT_AGENDA: {
-        break;
-      }
-      case INTENTS.ADD_TASK: {
-        break;
-      }
-      case INTENTS.ASSIGN_USER_TO_TASK: {
-        break;
-      }
-      case INTENTS.NONE: {
-        break;
-      }
-    }
-  }
-
   addAttendee(name: string) {
-    this._attendeeService.addAttendee(new Attendee(name));
+   // this._attendeeService.addAttendee(new Attendee(name));
   }
 
 }

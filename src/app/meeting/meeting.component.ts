@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MeetingService } from 'app/meeting/meeting.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { SignalR, BroadcastEventListener } from 'ng2-signalr';
 import {AttendeeService} from 'app/attendees/attendee.service';
 import {Attendee} from 'app/attendees/attendee.model';
 import {ActionService} from 'app/actions/action.service';
@@ -9,6 +10,7 @@ import { Action } from 'app/actions/action.model';
 import { SelectItem } from 'primeng/primeng';
 import { Meeting } from 'app/meeting/meeting.model';
 import { Agenda } from 'app/agendas/agenda.model';
+import { INTENTS } from 'app/shared/intents.enum';
 
 @Component({
   selector: 'orc-meeting',
@@ -16,7 +18,7 @@ import { Agenda } from 'app/agendas/agenda.model';
   styleUrls: ['./meeting.component.css']
 })
 
-export class MeetingComponent {
+export class MeetingComponent implements OnInit {
   meeting: FirebaseObjectObservable<any>;
   _meeting: any;
   actionsItems: FirebaseListObservable < any[]>;
@@ -30,12 +32,15 @@ export class MeetingComponent {
   mainMeeting: Meeting;
   theAgenda: Agenda;
   selectedItems: any;
+  usrs: any[];
 
   constructor(
         private _attendeeService: AttendeeService,
         private _actionService: ActionService,
         private _meetingService: MeetingService,
+        private _signalR: SignalR,
         public snackBar: MdSnackBar
+
   ) {
     this.attendees = _attendeeService.attendees;
     this.actionsItems = _actionService.actionItems;
@@ -61,16 +66,16 @@ export class MeetingComponent {
       }
       // me.results = temp;
     });
-    const usrs = [
-      new Attendee('Kiran'),
-      new Attendee('Adeeb'),
-      new Attendee('Amaris'),
-      new Attendee('Joe'),
-      new Attendee('Sam'),
-      new Attendee('Mike')
+    this.usrs = [
+      new Attendee('Kiran', 'KR'),
+      new Attendee('Adeeb', 'AH'),
+      new Attendee('Amaris', 'AP'),
+      new Attendee('Joe', 'JP'),
+      new Attendee('Sam', 'SH'),
+      new Attendee('Mike', 'MK')
     ];
 
-    const ats = [new Attendee('Kiran'), new Attendee('Adeeb'), new Attendee('Amari')];
+    // const ats = [new Attendee('Kiran', 'KR'), new Attendee('Adeeb', 'AH'), new Attendee('Amari', 'AP')];
     const ag1 = new Agenda('Discuss The Problem');
     const ag2 = new Agenda('The Solution');
     const ac = new Action('Capture meeting audio');
@@ -87,24 +92,30 @@ export class MeetingComponent {
 
     const tmp = [];
     this.theAgenda = this.mainMeeting.agendaItems[0];
-    for (let i = 0; i < usrs.length; i++) {
-        tmp.push({ label: usrs[i].name, value: usrs[i].name})
+    for (let i = 0; i < this.usrs.length; i++) {
+        tmp.push({ label: this.usrs[i].name, value: this.usrs[i].name, initials: this.usrs[i].initials})
       }
     this.results = tmp;
     this.selectedItems = [];
 
     console.log(this.theAgenda);
   }
-  
+
   addAttendees() {
    // this._attendeeService.addAttendee(new Attendee(name));
-    const tmp = []
-    for (let i = 0; i < this.selectedItems.length; i++) {
-          tmp.push(new Attendee(this.selectedItems[i]));
-        }
+   const tmp = []
+   for (let i = 0; i < this.selectedItems.length; i++) {
+        tmp.push(new Attendee(this.selectedItems[i], this.usrs.find(user => user.name === this.selectedItems[i]).initials));
+      }
+
     this.mainMeeting.attendees = tmp;
+<<<<<<< HEAD
     this.snackBar.open("Successfully added attendees","Dismiss",{
       duration: 5000
+=======
+    this.snackBar.open('Successfully added attendees', 'Dismiss', {
+      duration: 2000
+>>>>>>> 9865b87c9deb11ab37e625e5a487bc9c1985e201
     });
     }
 
@@ -116,5 +127,54 @@ export class MeetingComponent {
   addAction(name: string) {
     this._actionService.addAction(new Action(name));
   }
+
+    ngOnInit() {
+    this._signalR.connect().then((c) => {
+
+      const onMessageSent = new BroadcastEventListener<any>('SpeechRecognised');
+      c.listen(onMessageSent)
+      onMessageSent.subscribe((msg: any) => {
+
+        const intent = msg.intent;
+        const entities = msg.entities;
+
+        console.log('intent: ' + intent);
+        if (entities.length > 0) {
+          console.log('first entity: ' + entities[0].entity + ' confidence:' + entities[0].score);
+        }
+
+        this.processIntent(intent, entities);
+      });
+
+    });
+  }
+
+  processIntent(intent: any, entities: any[]) {
+    switch (intent) {
+      case INTENTS.PREVIOUS_AGENDA: {
+        break;
+      }
+      case INTENTS.NEXT_AGENDA: {
+        break;
+      }
+      case INTENTS.ADD_TASK: {
+        // this.theAgenda.actions.push( { name: '' } )
+        break;
+      }
+      case INTENTS.ASSIGN_USER_TO_TASK: {
+        // this.currentTask.assignee = this.usrs.find(user => user.name === this.selectedItems[i]).initials)
+        break;
+      }
+      case INTENTS.NONE: {
+        break;
+      }
+    }
+  }
+
+
+
+
+
+
 
 }
