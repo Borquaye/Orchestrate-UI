@@ -41,7 +41,6 @@ export class MeetingComponent {
         } 
       }
     });
-
   }
 
   addAttendee(name: string) {

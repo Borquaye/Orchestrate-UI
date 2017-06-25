@@ -35,6 +35,7 @@ import {MultiSelectModule} from 'primeng/primeng';
 import {MdButtonModule} from '@angular/material';
 import {MdInputModule} from '@angular/material';
 import {MdCardModule} from '@angular/material';
+import {MdTabsModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {MdCardModule} from '@angular/material';
     MultiSelectModule,
     MdInputModule,
     MdButtonModule,
-    MdCardModule
+    MdCardModule,
+    MdTabsModule
   ],
   providers: [
     AgendaService,
