@@ -1,0 +1,7 @@
+export enum INTENTS {
+    NONE,
+    ADD_TASK,
+    ASSIGN_USER_TO_TASK,
+    NEXT_AGENDA,
+    PREVIOUS_AGENDA
+}

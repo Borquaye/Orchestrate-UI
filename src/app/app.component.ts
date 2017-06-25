@@ -5,7 +5,8 @@ import { AgendaService } from 'app/agendas/agenda.service';
 import { AttendeeService } from 'app/attendees/attendee.service';
 import { Observable } from 'rxjs/Observable';
 import { Attendee } from 'app/attendees/attendee.model';
-import {SelectItem} from 'primeng/primeng';
+import { SelectItem } from 'primeng/primeng';
+import { INTENTS } from 'app/shared/intents.enum';
 
 
 @Component({
@@ -14,7 +15,7 @@ import {SelectItem} from 'primeng/primeng';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'orc';
+  title = 'Orchestra';
   attendeeName: string;
   attendees: any[]; // FirebaseListObservable<Attendee[]>;
   results: SelectItem[];
@@ -40,7 +41,7 @@ export class AppComponent implements OnInit {
       //   me.attendees.push(me._meeting.value.agendaItems[Object.keys(me._meeting.value.agendaItems)[o]]);
       // }
     });
-    //this.attendees = _attendeeService.attendees;
+    // this.attendees = _attendeeService.attendees;
   }
 
   ngOnInit() {
@@ -54,12 +55,34 @@ export class AppComponent implements OnInit {
         const entities = msg.entities;
 
         console.log('intent: ' + intent);
-        if(entities.length > 0) { 
-          console.log('first entity: ' + entities[0].entity + " confidence:" + entities[0].score);
+        if (entities.length > 0) {
+          console.log('first entity: ' + entities[0].entity + ' confidence:' + entities[0].score);
         }
+
+        this.processIntent(intent, entities);
       });
 
     });
+  }
+
+  processIntent(intent: any, entities: any[]) {
+    switch (intent) {
+      case INTENTS.PREVIOUS_AGENDA: {
+        break;
+      }
+      case INTENTS.NEXT_AGENDA: {
+        break;
+      }
+      case INTENTS.ADD_TASK: {
+        break;
+      }
+      case INTENTS.ASSIGN_USER_TO_TASK: {
+        break;
+      }
+      case INTENTS.NONE: {
+        break;
+      }
+    }
   }
 
   addAttendee(name: string) {

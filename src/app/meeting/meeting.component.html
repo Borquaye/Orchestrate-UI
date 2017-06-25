@@ -1,11 +1,10 @@
 <div class="wrapMan">
-
-  <h2>
-    {{ (meeting | async)?.meetingName}}
-  </h2>
-
+    <h2>
+      {{ mainMeeting.title}}
+    </h2>
+    
   <md-tab-group>
-    <md-tab label={{agenda.agendaItemName}} *ngFor="let agenda of meetingAgendas">
+    <md-tab label={{theAgenda.name}} *ngFor="let agenda of meetingAgendas">
       <div class="flex-container">
         <div class="attendeePanel">
           <h5>Attendees</h5>
@@ -14,10 +13,10 @@
             <button md-button type="button" (click)="addAttendee(attendeeInput.value)">Add Attendees</button>
           </div>
           
-          <md-card class="attendeeContainer" *ngFor="let attendee of attendees | async">
+          <md-card class="attendeeContainer" *ngFor="let attendee of mainMeeting.attendees">
             <button md-mini-fab><md-icon>{{attendee.initials }}</md-icon></button>
-            <p>{{attendee.name | json}}</p> 
-            <button md-button class="btn-del" type="button" (click)="removeAttendee(attendeeInput.value)">X</button>
+            <p>{{attendee.name}}</p> 
+            <button md-button class="btn-del" type="button" (click)="removeAttendee(attendee)">X</button>
           </md-card>
         </div>
 
@@ -37,5 +36,6 @@
       </div>
     </md-tab>
   </md-tab-group>
+
 </div>
 
