@@ -1,21 +1,24 @@
-<md-card class="wrapMan">
+<div class="wrapMan">
 
-<md-card-title>
   <h2>
     {{ (meeting | async)?.meetingName}}
   </h2>
+
   <h3>
     {{ currentAgenda.agendaItemName }}
   </h3>
-</md-card-title>
 
-<md-card-content class="flex-container">
+
+<div class="flex-container">
   <div class="attendeePanel">
+
     <h2>Attendees</h2>
-    <!--<md-input-container>
-        <input mdInput #attendeeInput type="text" pInputText [(ngModel)]="attendeeName"/>
-    </md-input-container>-->
     <p-multiSelect [options]="results" [(ngModel)]="selectedItems" defaultLabel="People"></p-multiSelect>
+
+    <!--<h5>Attendees</h5>
+    <md-input-container>
+        <input mdInput placeholder="Name of Attendee" #attendeeInput type="text" pInputText [(ngModel)]="attendeeName"/>
+    </md-input-container>-->
 
     <button md-button type="button" (click)="addAttendee(attendeeInput.value)">Add Attendee</button>
     
@@ -30,7 +33,7 @@
   <div class="actionPanel"> 
     <h2>Action points</h2>
     <md-input-container>
-      <input mdInput #actionInput type="text" pInputText [(ngModel)]="actionName"/>
+      <input mdInput placeholder="Name of Action" #actionInput type="text" pInputText [(ngModel)]="actionName"/>
     </md-input-container>
     <button md-button type="button" (click)="addAction(actionInput.value)">Add Action</button>
 
@@ -41,6 +44,6 @@
 
   <!--<h3 *ngFor="let agenda of meetingAgendas">{{ agenda.agendaItemName }}</h3>-->
 
-</md-card-content>
-</md-card>
+  </div>
+</div>
 
