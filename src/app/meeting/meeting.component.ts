@@ -89,6 +89,7 @@ export class MeetingComponent {
         tmp.push({ label: usrs[i].name, value: usrs[i].name})
       }
     this.results = tmp;
+    this.selectedItems = [];
 
   }
 
