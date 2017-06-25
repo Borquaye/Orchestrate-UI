@@ -109,14 +109,8 @@ export class MeetingComponent implements OnInit {
       }
 
     this.mainMeeting.attendees = tmp;
-<<<<<<< HEAD
     this.snackBar.open("Successfully added attendees","Dismiss",{
       duration: 5000
-=======
-    this.snackBar.open('Successfully added attendees', 'Dismiss', {
-      duration: 2000
->>>>>>> 9865b87c9deb11ab37e625e5a487bc9c1985e201
-    });
     }
 
   removeAttendee(attendee: Attendee) {
