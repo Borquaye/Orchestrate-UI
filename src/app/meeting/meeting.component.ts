@@ -33,11 +33,8 @@ export class MeetingComponent implements OnInit {
   theAgenda: Agenda;
   selectedItems: any;
   usrs: any[];
-<<<<<<< HEAD
   agendaNames: string[];
-=======
   currentAction: any;
->>>>>>> 517c81022cad64663dbaf4eb70f8cbf30c81546a
 
   tabIndex: number;
   constructor(
