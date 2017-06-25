@@ -30,7 +30,7 @@
           </div>
 
           <md-card class="actionContainer">
-            <div *ngFor="let action of actionItems | async">{{action.name | json}}</div>
+            <div *ngFor="let action of theAgenda.actions ">{{action.name}}</div>
           </md-card>
         </div>
       </div>

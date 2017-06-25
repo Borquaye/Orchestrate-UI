@@ -5,7 +5,7 @@ import { SignalR, BroadcastEventListener } from 'ng2-signalr';
 import {AttendeeService} from 'app/attendees/attendee.service';
 import {Attendee} from 'app/attendees/attendee.model';
 import {ActionService} from 'app/actions/action.service';
-import {MdSnackBar} from "@angular/material";
+import {MdSnackBar} from '@angular/material';
 import { Action } from 'app/actions/action.model';
 import { SelectItem } from 'primeng/primeng';
 import { Meeting } from 'app/meeting/meeting.model';
@@ -33,6 +33,7 @@ export class MeetingComponent implements OnInit {
   theAgenda: Agenda;
   selectedItems: any;
   usrs: any[];
+  currentAction: any;
 
   constructor(
         private _attendeeService: AttendeeService,
@@ -151,11 +152,21 @@ export class MeetingComponent implements OnInit {
         break;
       }
       case INTENTS.ADD_TASK: {
-        // this.theAgenda.actions.push( { name: '' } )
+        if (entities.length > 0) {
+          // toast message
+        } else {
+          const action = new Action(entities[0]);
+          this.theAgenda.actions.push(action)
+          this.currentAction = action;
+        }
         break;
       }
       case INTENTS.ASSIGN_USER_TO_TASK: {
-        // this.currentTask.assignee = this.usrs.find(user => user.name === this.selectedItems[i]).initials)
+        if (entities.length > 0) {
+          // toast message
+        } else {
+          this.currentAction.assignee = this.usrs.find(user => user.name === entities[0]).initials;
+        }
         break;
       }
       case INTENTS.NONE: {
