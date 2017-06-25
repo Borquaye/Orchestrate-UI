@@ -40,3 +40,7 @@ body{
     cursor: pointer;
     width: 100%;
 }
+
+.mat-tab-label[_ngcontent-c2]{
+    color: #ecf0f1;
+}
