@@ -157,10 +157,14 @@ export class MeetingComponent implements OnInit {
     });
   }
   nextAgenda() {
-    this.tabIndex = (this.tabIndex + 1) % this.meetingAgendas.length;
+    
+    this.tabIndex = (this.tabIndex + 1) %this.mainMeeting.agendaItems.length ;
+
+
+
   }
   previousAgenda() {
-    this.tabIndex = (this.tabIndex - 1) % this.meetingAgendas.length;
+    this.tabIndex = (this.tabIndex - 1) % this.mainMeeting.agendaItems.length ;
     if (this.tabIndex < 0) {
       this.tabIndex = this.meetingAgendas.length;
     }
@@ -177,10 +181,12 @@ export class MeetingComponent implements OnInit {
         break;
       }
       case "AddTask": {
-        if (entities.length > 0) {
+        if (entities.length <= 0) {
           // toast message
         } else {
-          const action = new Action(entities[0]);
+    
+          const action = new Action(entities[0].entity);
+          console.log(action);
           this.theAgenda.actions.push(action)
           this.currentAction = action;
         }
