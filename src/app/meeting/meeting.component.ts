@@ -29,10 +29,16 @@ export class MeetingComponent {
     this.meeting = this._meetingService.meeting;
     const me = this;
     me.meetingAgendas = [];
+
     this._meetingService.getMeeting('super_important_meeting_1', (data) => {
       me._meeting = this._meetingService._meeting;
       for (let o = 0; o < Object.keys(me._meeting.value.agendaItems).length; o++) {
         me.meetingAgendas.push(me._meeting.value.agendaItems[Object.keys(me._meeting.value.agendaItems)[o]]);
+      }
+      for (let v = 0; v < Object.keys(me.meetingAgendas).length; v++) {
+        for(let z=0; z < me.meetingAgendas[v].actions.length; z++){
+          me.actionsItems.push(me.meetingAgendas[v].action[z]);
+        } 
       }
     });
 
