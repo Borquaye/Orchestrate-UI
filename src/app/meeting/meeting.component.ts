@@ -79,19 +79,22 @@ export class MeetingComponent implements OnInit {
       new Attendee('Amaris', 'AP'),
       new Attendee('Joe', 'JP'),
       new Attendee('Sam', 'SH'),
-      new Attendee('Mike', 'MK')
+      new Attendee('Mike', 'MK'),
+      new Attendee('Daniel', 'DB'),
+      new Attendee('Colin', 'CB'),
+      new Attendee('Audience', 'A'),
     ];
 
     const ag1 = new Agenda('Discuss The Problem');
     const ag2 = new Agenda('The Solution');
-    const ac = new Action('Capture meeting audio');
-    //ac.assignee = 'Kiran';
-    ac.assignee = new Attendee('Kiran', 'KR')
-    const ac2 = new Action('Do what you will');
-    //ac2.assignee = 'Kiran';
-    ac2.assignee = new Attendee('Kiran', 'KR')
-    ag1.actions.push(ac2);
-    ag2.actions.push(ac);
+    // const ac = new Action('Capture meeting audio');
+    // ac.assignee = 'Kiran';
+    // ac.assignee = new Attendee('Kiran', 'KR')
+    // const ac2 = new Action('Do what you will');
+    // ac2.assignee = 'Kiran';
+    // ac2.assignee = new Attendee('Kiran', 'KR')
+    // ag1.actions.push(ac2);
+    // ag2.actions.push(ac);
     const ag3 = new Agenda('Questions & Answers');
     const ag  = [ag1, ag2, ag3];
     this.mainMeeting = new Meeting(
