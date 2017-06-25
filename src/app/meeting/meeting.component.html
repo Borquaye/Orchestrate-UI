@@ -1,57 +1,41 @@
 <div class="wrapMan">
-  <!--<h2>
-    {{ (meeting | async)?.meetingName}}
-  </h2>-->
-
-  <h2>
-    {{ mainMeeting.title}}
-  </h2>
-
-  <!--<h3>
-    {{ currentAgenda.agendaItemName }}
-  </h3>-->
-
-  <h3>
-    {{ theAgenda.name }}
-  </h3>
-
-
-<div class="flex-container">
-  <div class="attendeePanel">
-
-    <h2>Attendees</h2>
-    <p-multiSelect [options]="results" [(ngModel)]="selectedItems" defaultLabel="People"></p-multiSelect>
-
-    <!--<h5>Attendees</h5>
-    <md-input-container>
-        <input mdInput placeholder="Name of Attendee" #attendeeInput type="text" pInputText [(ngModel)]="attendeeName"/>
-    </md-input-container>-->
-
-    <button md-button type="button" (click)="addAttendee(attendeeInput.value)">Add Attendee</button>
+    <h2>
+      {{ mainMeeting.title}}
+    </h2>
     
-    <md-card class="attendeeContainer" *ngFor="let attendee of attendees | async">
-      <img src="http://via.placeholder.com/42x42" alt="" height="42px" width="42px" style="border-radius:50%;"> 
-      <p>{{attendee.name | json}}</p> 
-      <button md-button class="btn-del" type="button" (click)="removeAttendee(attendeeInput.value)">X</button>
-    </md-card>
+  <md-tab-group>
+    <md-tab label={{theAgenda.name}} *ngFor="let agenda of meetingAgendas">
+      <div class="flex-container">
+        <div class="attendeePanel">
+          <h5>Attendees</h5>
+          <div class="adders">
+            <p-multiSelect [options]="results" [(ngModel)]="selectedItems" defaultLabel="People"></p-multiSelect>
+            <button md-button type="button" (click)="addAttendees()">Add Attendees</button>
+          </div>
+          
+          <md-card class="attendeeContainer" *ngFor="let attendee of mainMeeting.attendees">
+            <button md-mini-fab><md-icon>{{attendee.initials }}</md-icon></button>
+            <p>{{attendee.name}}</p> 
+            <button md-button class="btn-del" type="button" (click)="removeAttendee(attendee)">X</button>
+          </md-card>
+        </div>
 
-  </div>
+        <div class="actionPanel"> 
+          <h5>Action points</h5>
+          <div class="adders">
+            <md-input-container>
+              <input mdInput placeholder="Name of Action" #actionInput type="text" pInputText [(ngModel)]="actionName"/>
+            </md-input-container>
+            <button md-button type="button" (click)="addAction(actionInput.value)">Add Action</button>
+          </div>
 
-  <div class="actionPanel"> 
-    <h2>Action points</h2>
-    <md-input-container>
-      <input mdInput placeholder="Name of Action" #actionInput type="text" pInputText [(ngModel)]="actionName"/>
-    </md-input-container>
-    <button md-button type="button" (click)="addAction(actionInput.value)">Add Action</button>
-
-    <md-card class="actionContainer">
-      <div *ngFor="let action of actionItems | async">{{action.name | json}}</div>
-    </md-card>
-  </div>
-
-  <!--<h3 *ngFor="let agenda of meetingAgendas">{{ agenda.agendaItemName }}</h3>-->
-
-  </div>
+          <md-card class="actionContainer">
+            <div *ngFor="let action of actionItems | async">{{action.name | json}}</div>
+          </md-card>
+        </div>
+      </div>
+    </md-tab>
+  </md-tab-group>
 
 </div>
 

@@ -10,6 +10,14 @@
       margin: 3% 15%; 
 }
 
+p-multiSelect{
+   min-width: 28%;
+}
+
+p-multiselect > div.ui-multiselect{
+    width: 100%;
+}
+
 .attendeePanel{
    display: -webkit-flex;
    display: flex;
@@ -55,6 +63,16 @@
 
 md-card {
     margin-bottom: 10px;
+    background-color: #ecf0f1;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+md-card p {
+    margin: auto 0;
 }
 
 md-card > img{

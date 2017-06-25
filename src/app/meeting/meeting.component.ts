@@ -28,6 +28,7 @@ export class MeetingComponent {
 
   mainMeeting: Meeting;
   theAgenda: Agenda;
+  selectedItems: any;
 
   constructor(
         private _attendeeService: AttendeeService,
@@ -39,6 +40,7 @@ export class MeetingComponent {
     this.meeting = this._meetingService.meeting;
     const me = this;
     me.meetingAgendas = [];
+
     this._meetingService.getMeeting('super_important_meeting_1', (data) => {
       me._meeting = this._meetingService._meeting;
       for (let o = 0; o < Object.keys(me._meeting.value.agendaItems).length; o++) {
@@ -55,10 +57,18 @@ export class MeetingComponent {
       for (let i = 0; i < me.users.length; i++) {
         temp.push({ label: me.users[i].value.username, value: me.users[i].value.username})
       }
-      me.results = temp;
+      // me.results = temp;
     });
+    const usrs = [
+      new Attendee('Kiran'),
+      new Attendee('Adeeb'),
+      new Attendee('Amari'),
+      new Attendee('Joe'),
+      new Attendee('Sam'),
+      new Attendee('Mike')
+    ];
 
-    const ats = [new Attendee('Kiran'), new Attendee('Adeeb'), new Attendee('Amari'), new Attendee('Joe'), new Attendee('Sam')];
+    const ats = [new Attendee('Kiran'), new Attendee('Adeeb'), new Attendee('Amari')];
     const ag1 = new Agenda('Discuss The Problem');
     const ag2 = new Agenda('The Solution');
     const ac = new Action('Capture meeting audio');
@@ -68,22 +78,32 @@ export class MeetingComponent {
     const ag  = [ag1, ag2, ag3];
     this.mainMeeting = new Meeting(
       'Orchestra Demo Meeting',
-      ats,
+      [],
       ag,
       'Adeeb'
     )
 
+    const tmp = [];
     this.theAgenda = this.mainMeeting.agendaItems[0];
-
+    for (let i = 0; i < usrs.length; i++) {
+        tmp.push({ label: usrs[i].name, value: usrs[i].name})
+      }
+    this.results = tmp;
 
   }
 
-  addAttendee(name: string) {
-    this._attendeeService.addAttendee(new Attendee(name));
+  addAttendees() {
+   // this._attendeeService.addAttendee(new Attendee(name));
+   const tmp = []
+   for (let i = 0; i < this.selectedItems.length; i++) {
+        tmp.push(new Attendee(this.selectedItems[i]));
+      }
+   this.mainMeeting.attendees = tmp;
   }
 
-  removeAttendee(name: string) {
-    this._attendeeService.removeAttendee(name);
+  removeAttendee(attendee: Attendee) {
+    // this._attendeeService.removeAttendee(name);
+    this.mainMeeting.attendees.splice(this.mainMeeting.attendees.indexOf(attendee), 1);
   }
 
   addAction(name: string) {
