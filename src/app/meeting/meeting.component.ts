@@ -5,6 +5,7 @@ import { SignalR, BroadcastEventListener } from 'ng2-signalr';
 import {AttendeeService} from 'app/attendees/attendee.service';
 import {Attendee} from 'app/attendees/attendee.model';
 import {ActionService} from 'app/actions/action.service';
+import {MdSnackBar} from "@angular/material";
 import { Action } from 'app/actions/action.model';
 import { SelectItem } from 'primeng/primeng';
 import { Meeting } from 'app/meeting/meeting.model';
@@ -20,8 +21,8 @@ import { INTENTS } from 'app/shared/intents.enum';
 export class MeetingComponent implements OnInit {
   meeting: FirebaseObjectObservable<any>;
   _meeting: any;
-  actionsItems: FirebaseListObservable <any[]>;
-  attendees: FirebaseListObservable <Attendee[]>;
+  actionsItems: FirebaseListObservable < any[]>;
+  attendees: FirebaseListObservable < Attendee[] >;
   meetingAgendas: any[];
   currentAgenda: any;
 
@@ -37,7 +38,9 @@ export class MeetingComponent implements OnInit {
         private _attendeeService: AttendeeService,
         private _actionService: ActionService,
         private _meetingService: MeetingService,
-        private _signalR: SignalR
+        private _signalR: SignalR,
+        public snackBar: MdSnackBar
+
   ) {
     this.attendees = _attendeeService.attendees;
     this.actionsItems = _actionService.actionItems;
@@ -69,7 +72,7 @@ export class MeetingComponent implements OnInit {
       new Attendee('Amaris', 'AP'),
       new Attendee('Joe', 'JP'),
       new Attendee('Sam', 'SH'),
-      new Attendee('Mike', 'MM')
+      new Attendee('Mike', 'MK')
     ];
 
     // const ats = [new Attendee('Kiran', 'KR'), new Attendee('Adeeb', 'AH'), new Attendee('Amari', 'AP')];
@@ -84,8 +87,7 @@ export class MeetingComponent implements OnInit {
       'Orchestra Demo Meeting',
       [],
       ag,
-      'Adeeb'
-    )
+      'Adeeb')
 
     const tmp = [];
     this.theAgenda = this.mainMeeting.agendaItems[0];
@@ -103,8 +105,12 @@ export class MeetingComponent implements OnInit {
    for (let i = 0; i < this.selectedItems.length; i++) {
         tmp.push(new Attendee(this.selectedItems[i], this.usrs.find(user => user.name === this.selectedItems[i]).initials));
       }
-   this.mainMeeting.attendees = tmp;
-  }
+
+    this.mainMeeting.attendees = tmp;
+    this.snackBar.open('Successfully added attendees', 'Dismiss', {
+      duration: 2000
+    });
+    }
 
   removeAttendee(attendee: Attendee) {
     // this._attendeeService.removeAttendee(name);

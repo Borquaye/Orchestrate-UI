@@ -36,6 +36,7 @@ import {MdButtonModule} from '@angular/material';
 import {MdInputModule} from '@angular/material';
 import {MdCardModule} from '@angular/material';
 import {MdTabsModule} from '@angular/material';
+import {MdSnackBarModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MdTabsModule} from '@angular/material';
     MdInputModule,
     MdButtonModule,
     MdCardModule,
-    MdTabsModule
+    MdTabsModule,
+    MdSnackBarModule
   ],
   providers: [
     AgendaService,
