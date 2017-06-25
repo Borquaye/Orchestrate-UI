@@ -56,7 +56,6 @@ export class MeetingComponent implements OnInit {
         //
       }
       me.currentAgenda = me.meetingAgendas[0];
-      debugger;
     });
 
     me.users = [];
@@ -80,9 +79,11 @@ export class MeetingComponent implements OnInit {
     const ag1 = new Agenda('Discuss The Problem');
     const ag2 = new Agenda('The Solution');
     const ac = new Action('Capture meeting audio');
-    ac.assignee = 'Kiran';
+    //ac.assignee = 'Kiran';
+    ac.assignee = new Attendee('Kiran', 'KR')
     const ac2 = new Action('Do what you will');
-    ac2.assignee = 'Kiran';
+    //ac2.assignee = 'Kiran';
+    ac2.assignee = new Attendee('Kiran', 'KR')
     ag1.actions.push(ac2);
     ag2.actions.push(ac);
     const ag3 = new Agenda('Questions & Answers');
@@ -169,7 +170,7 @@ export class MeetingComponent implements OnInit {
         if (entities.length > 0) {
           // toast message
         } else {
-          this.currentAction.assignee = this.usrs.find(user => user.name === entities[0]).initials;
+          this.currentAction.assignee = this.usrs.find(user => user.name === entities[0]);
         }
         break;
       }
