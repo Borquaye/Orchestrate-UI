@@ -81,6 +81,7 @@ export class MeetingComponent implements OnInit {
     const ag2 = new Agenda('The Solution');
     const ac = new Action('Capture meeting audio');
     ac.assignee = 'Kiran';
+    ag1.actions.push(ac);
     ag2.actions.push(ac);
     const ag3 = new Agenda('Questions & Answers');
     const ag  = [ag1, ag2, ag3];
@@ -98,6 +99,7 @@ export class MeetingComponent implements OnInit {
     this.results = tmp;
     this.selectedItems = [];
 
+    console.log(this.theAgenda);
   }
 
   addAttendees() {
@@ -109,9 +111,9 @@ export class MeetingComponent implements OnInit {
 
     this.mainMeeting.attendees = tmp;
     this.snackBar.open('Successfully added attendees', 'Dismiss', {
-      duration: 2000
+      duration: 5000
     });
-    }
+  }
 
   removeAttendee(attendee: Attendee) {
     // this._attendeeService.removeAttendee(name);
@@ -174,11 +176,5 @@ export class MeetingComponent implements OnInit {
       }
     }
   }
-
-
-
-
-
-
 
 }
