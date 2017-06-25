@@ -5,6 +5,7 @@ import {AttendeeService} from 'app/attendees/attendee.service';
 import {Attendee} from 'app/attendees/attendee.model';
 import {ActionService} from 'app/actions/action.service';
 import {Action} from 'app/actions/action.model';
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'orc-meeting',
@@ -15,14 +16,15 @@ import {Action} from 'app/actions/action.model';
 export class MeetingComponent {
   meeting: FirebaseObjectObservable<any>;
   _meeting: any;
-  actionsItems: FirebaseListObservable < any[] >;
+  actionsItems: FirebaseListObservable < any[]   >;
   attendees: FirebaseListObservable < Attendee[] >;
   meetingAgendas: any[];
 
   constructor(
         private _attendeeService: AttendeeService,
         private _actionService: ActionService,
-        private _meetingService: MeetingService
+        private _meetingService: MeetingService,
+        public snackBar: MdSnackBar
   ) {
     this.attendees = _attendeeService.attendees;
     this.actionsItems = _actionService.actionItems;
@@ -45,6 +47,7 @@ export class MeetingComponent {
 
   addAttendee(name: string) {
     this._attendeeService.addAttendee(new Attendee(name));
+    this.snackBar.open("Successfully added attendees");
   }
 
   removeAttendee(name: string) {
