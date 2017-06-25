@@ -1,11 +1,18 @@
 <div class="wrapMan">
+  <!--<h2>
+    {{ (meeting | async)?.meetingName}}
+  </h2>-->
 
   <h2>
-    {{ (meeting | async)?.meetingName}}
+    {{ mainMeeting.title}}
   </h2>
 
-  <h3>
+  <!--<h3>
     {{ currentAgenda.agendaItemName }}
+  </h3>-->
+
+  <h3>
+    {{ theAgenda.name }}
   </h3>
 
 
@@ -25,7 +32,7 @@
     <md-card class="attendeeContainer" *ngFor="let attendee of attendees | async">
       <img src="http://via.placeholder.com/42x42" alt="" height="42px" width="42px" style="border-radius:50%;"> 
       <p>{{attendee.name | json}}</p> 
-      <button md-button class="btn-style" type="button" (click)="removeAttendee(attendeeInput.value)">x</button>
+      <button md-button class="btn-del" type="button" (click)="removeAttendee(attendeeInput.value)">X</button>
     </md-card>
 
   </div>
@@ -45,5 +52,6 @@
   <!--<h3 *ngFor="let agenda of meetingAgendas">{{ agenda.agendaItemName }}</h3>-->
 
   </div>
+
 </div>
 

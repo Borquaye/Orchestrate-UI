@@ -6,6 +6,8 @@ import {Attendee} from 'app/attendees/attendee.model';
 import {ActionService} from 'app/actions/action.service';
 import { Action } from 'app/actions/action.model';
 import { SelectItem } from 'primeng/primeng';
+import { Meeting } from 'app/meeting/meeting.model';
+import { Agenda } from 'app/agendas/agenda.model';
 
 @Component({
   selector: 'orc-meeting',
@@ -16,13 +18,16 @@ import { SelectItem } from 'primeng/primeng';
 export class MeetingComponent {
   meeting: FirebaseObjectObservable<any>;
   _meeting: any;
-  actionsItems: FirebaseListObservable < any[] >;
-  attendees: FirebaseListObservable < Attendee[] >;
+  actionsItems: FirebaseListObservable <any[]>;
+  attendees: FirebaseListObservable <Attendee[]>;
   meetingAgendas: any[];
   currentAgenda: any;
 
   users: any[];
   results: SelectItem[];
+
+  mainMeeting: Meeting;
+  theAgenda: Agenda;
 
   constructor(
         private _attendeeService: AttendeeService,
@@ -38,6 +43,7 @@ export class MeetingComponent {
       me._meeting = this._meetingService._meeting;
       for (let o = 0; o < Object.keys(me._meeting.value.agendaItems).length; o++) {
         me.meetingAgendas.push(me._meeting.value.agendaItems[Object.keys(me._meeting.value.agendaItems)[o]]);
+        //
       }
       me.currentAgenda = me.meetingAgendas[0];
     });
@@ -51,6 +57,24 @@ export class MeetingComponent {
       }
       me.results = temp;
     });
+
+    const ats = [new Attendee('Kiran'), new Attendee('Adeeb'), new Attendee('Amari'), new Attendee('Joe'), new Attendee('Sam')];
+    const ag1 = new Agenda('Discuss The Problem');
+    const ag2 = new Agenda('The Solution');
+    const ac = new Action('Capture meeting audio');
+    ac.assignee = 'Kiran';
+    ag2.actions.push(ac);
+    const ag3 = new Agenda('Questions & Answers');
+    const ag  = [ag1, ag2, ag3];
+    this.mainMeeting = new Meeting(
+      'Orchestra Demo Meeting',
+      ats,
+      ag,
+      'Adeeb'
+    )
+
+    this.theAgenda = this.mainMeeting.agendaItems[0];
+
 
   }
 
