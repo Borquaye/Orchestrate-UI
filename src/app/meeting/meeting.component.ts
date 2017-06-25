@@ -82,8 +82,7 @@ export class MeetingComponent {
       'Orchestra Demo Meeting',
       [],
       ag,
-      'Adeeb'
-    )
+      'Adeeb')
 
     const tmp = [];
     this.theAgenda = this.mainMeeting.agendaItems[0];
@@ -97,12 +96,14 @@ export class MeetingComponent {
   
   addAttendees() {
    // this._attendeeService.addAttendee(new Attendee(name));
-   const tmp = []
-   for (let i = 0; i < this.selectedItems.length; i++) {
-        tmp.push(new Attendee(this.selectedItems[i]));
-      }
-   this.mainMeeting.attendees = tmp;
-    this.snackBar.open("Successfully added attendees");
+    const tmp = []
+    for (let i = 0; i < this.selectedItems.length; i++) {
+          tmp.push(new Attendee(this.selectedItems[i]));
+        }
+    this.mainMeeting.attendees = tmp;
+    this.snackBar.open("Successfully added attendees","Dismiss",{
+      duration: 2000
+    });
     }
 
   removeAttendee(attendee: Attendee) {

@@ -10,7 +10,7 @@
           <h5>Attendees</h5>
           <div class="adders">
             <p-multiSelect [options]="results" [(ngModel)]="selectedItems" defaultLabel="Add People"></p-multiSelect>
-            <button md-button type="button" (click)="addAttendee(attendeeInput.value)">Add Attendees</button>
+            <button md-button type="button" (click)="addAttendees()">Add Attendees</button>
           </div>
           
           <md-card class="attendeeContainer" *ngFor="let attendee of mainMeeting.attendees">
