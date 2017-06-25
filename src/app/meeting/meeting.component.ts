@@ -159,7 +159,7 @@ export class MeetingComponent implements OnInit {
   previousAgenda(){
     this.tabIndex = (this.tabIndex -1) % this.meetingAgendas.length;
     if (this.tabIndex<0){
-      this.tabIndex = this.meetingAgendas.length-1;
+      this.tabIndex = this.meetingAgendas.length;
     }
   }
   processIntent(intent: any, entities: any[]) {

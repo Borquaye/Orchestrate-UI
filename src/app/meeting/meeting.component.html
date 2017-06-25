@@ -3,7 +3,7 @@
       {{ mainMeeting.title}}
     </h2>
     
-  <md-tab-group>
+  <md-tab-group selectedIndex={{tabIndex}}>
     <md-tab label={{agenda.name}} *ngFor="let agenda of mainMeeting.agendaItems">
       <div class="flex-container">
         <button md-button type="button" (click)="previousAgenda()">Temporary Test</button>
