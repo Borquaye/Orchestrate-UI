@@ -29,7 +29,7 @@
             <button md-button type="button" (click)="addAction(actionInput.value)">Add Action</button>
           </div>
 
-          <md-card class="actionContainer" *ngFor="let action of theAgenda.actions">
+          <md-card class="actionContainer" *ngFor="let action of agenda.action.actions">
             <!--<button md-mini-fab><md-icon>{{action.initials }}</md-icon></button>-->
             <button md-mini-fab><md-icon>KK</md-icon></button>
             <p>{{action.name}}</p> 

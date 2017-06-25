@@ -75,12 +75,13 @@ export class MeetingComponent implements OnInit {
       new Attendee('Mike', 'MK')
     ];
 
-    // const ats = [new Attendee('Kiran', 'KR'), new Attendee('Adeeb', 'AH'), new Attendee('Amari', 'AP')];
     const ag1 = new Agenda('Discuss The Problem');
     const ag2 = new Agenda('The Solution');
     const ac = new Action('Capture meeting audio');
     ac.assignee = 'Kiran';
-    ag1.actions.push(ac);
+    const ac2 = new Action('Do what you will');
+    ac2.assignee = 'Kiran';
+    ag1.actions.push(ac2);
     ag2.actions.push(ac);
     const ag3 = new Agenda('Questions & Answers');
     const ag  = [ag1, ag2, ag3];
