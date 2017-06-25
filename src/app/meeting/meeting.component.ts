@@ -33,8 +33,10 @@ export class MeetingComponent implements OnInit {
   theAgenda: Agenda;
   selectedItems: any;
   usrs: any[];
+  agendaNames: string[];
   currentAction: any;
 
+  tabIndex: number;
   constructor(
         private _attendeeService: AttendeeService,
         private _actionService: ActionService,
@@ -47,23 +49,27 @@ export class MeetingComponent implements OnInit {
     this.actionsItems = _actionService.actionItems;
     this.meeting = this._meetingService.meeting;
     const me = this;
+    this.tabIndex=0;
     me.meetingAgendas = [];
-
+    me.agendaNames = [];
     this._meetingService.getMeeting('super_important_meeting_1', (data) => {
       me._meeting = this._meetingService._meeting;
       for (let o = 0; o < Object.keys(me._meeting.value.agendaItems).length; o++) {
         me.meetingAgendas.push(me._meeting.value.agendaItems[Object.keys(me._meeting.value.agendaItems)[o]]);
         //
+        me.agendaNames.push(me.meetingAgendas[o].agendaItemName);
       }
       me.currentAgenda = me.meetingAgendas[0];
     });
 
     me.users = [];
+    
     this._attendeeService.getAttendees((data) => {
       me.users = data;
       const temp = [];
       for (let i = 0; i < me.users.length; i++) {
         temp.push({ label: me.users[i].value.username, value: me.users[i].value.username})
+        
       }
       // me.results = temp;
     });
@@ -147,13 +153,23 @@ export class MeetingComponent implements OnInit {
 
     });
   }
-
+  nextAgenda(){
+    this.tabIndex = (this.tabIndex + 1) % this.meetingAgendas.length;
+  }
+  previousAgenda(){
+    this.tabIndex = (this.tabIndex -1) % this.meetingAgendas.length;
+    if (this.tabIndex<0){
+      this.tabIndex = this.meetingAgendas.length;
+    }
+  }
   processIntent(intent: any, entities: any[]) {
     switch (intent) {
       case INTENTS.PREVIOUS_AGENDA: {
+        this.previousAgenda();
         break;
       }
       case INTENTS.NEXT_AGENDA: {
+        this.nextAgenda();
         break;
       }
       case INTENTS.ADD_TASK: {
