@@ -64,7 +64,7 @@ export class MeetingComponent {
     const usrs = [
       new Attendee('Kiran'),
       new Attendee('Adeeb'),
-      new Attendee('Amari'),
+      new Attendee('Amaris'),
       new Attendee('Joe'),
       new Attendee('Sam'),
       new Attendee('Mike')
@@ -75,6 +75,7 @@ export class MeetingComponent {
     const ag2 = new Agenda('The Solution');
     const ac = new Action('Capture meeting audio');
     ac.assignee = 'Kiran';
+    ag1.actions.push(ac);
     ag2.actions.push(ac);
     const ag3 = new Agenda('Questions & Answers');
     const ag  = [ag1, ag2, ag3];
@@ -92,6 +93,7 @@ export class MeetingComponent {
     this.results = tmp;
     this.selectedItems = [];
 
+    console.log(this.theAgenda);
   }
   
   addAttendees() {
@@ -102,7 +104,7 @@ export class MeetingComponent {
         }
     this.mainMeeting.attendees = tmp;
     this.snackBar.open("Successfully added attendees","Dismiss",{
-      duration: 2000
+      duration: 5000
     });
     }
 
